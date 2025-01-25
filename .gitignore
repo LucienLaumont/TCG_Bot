@@ -1,0 +1,23 @@
+# Ignorer l'environnement virtuel
+venv/
+
+# Ignorer le fichier contenant des variables sensibles
+.env
+
+# Ignorer la base de donnée
+db.sqlite3
+
+# Ignorer les fichiers Python compilés
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorer les fichiers de logs
+*.log
+
+# Ignorer les fichiers générés par les outils ou éditeurs
+*.swp
+*.swo
+.idea/
+.vscode/
+*.DS_Store
