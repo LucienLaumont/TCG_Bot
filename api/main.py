@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import router
+from api.routes.pokemon_routes import router
 
 app = FastAPI()
 
