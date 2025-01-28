@@ -1,2 +1,42 @@
-/venv
-/__pycache__
+# Environnement virtuel
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# Fichiers de configuration des environnements
+*.env
+.env.*
+.env
+
+# Compiled Python files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Caches et logs
+*.log
+*.cache
+*.pytest_cache/
+.cache/
+*.coverage
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Configuration de l'IDE
+.vscode/
+.idea/
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
