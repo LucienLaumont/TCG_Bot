@@ -12,7 +12,7 @@ def list_players(db: Session = Depends(get_db)):
     return get_players(db)
 
 @router.get("/players/{discord_id}", response_model=Player)
-def get_player(discord_id: int, db: Session = Depends(get_db)):
+def get_player(discord_id: str, db: Session = Depends(get_db)):
     player = get_player_by_discord_id(db, discord_id)
     if not player:
         raise HTTPException(status_code=404, detail="Player not found")

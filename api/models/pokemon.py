@@ -8,11 +8,14 @@ class Pokemon(BaseModel):
     evolution: Optional[int] = None
     type1: str
     type2: Optional[str] = None
-    weight_kg: float
-    height_m: float
+    weight_kg: Optional[float] = None
+    height_m: Optional[float] = None
     generation: int
     is_legendary: int
-    classification: Optional[str] = None
+    classfication: Optional[str] = None
+
+    class Config:
+        from_attributes = True
 
 class PokemonCreate(BaseModel):
     name: str
@@ -20,8 +23,11 @@ class PokemonCreate(BaseModel):
     evolution: Optional[int] = None
     type1: str
     type2: Optional[str] = None
-    weight_kg: float
-    height_m: float
+    weight_kg: Optional[float] = None
+    height_m: Optional[float] = None
     generation: int
     is_legendary: int
-    classification: Optional[str] = None
+    classfication: Optional[str] = None
+
+    class Config:
+        from_attributes = True

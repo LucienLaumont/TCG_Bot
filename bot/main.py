@@ -1,6 +1,6 @@
 import os
 from discord.ext import commands
-from bot.commands.register import bot
+from bot.commands import bot
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")  # Ajoutez votre token ici ou dans un fichier .env
 
