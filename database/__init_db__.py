@@ -55,7 +55,7 @@ def create_tables():
 
         # Création de la table session avec les clés étrangères
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS session (
+            CREATE TABLE IF NOT EXISTS pokemonsession (
                 id SERIAL PRIMARY KEY,
                 discord_id TEXT NOT NULL,
                 pokedex_number INTEGER NOT NULL,
@@ -157,6 +157,7 @@ def insert_pokemon_data_to_db(dataframe):
         )
         cursor = conn.cursor()
 
+        create_tables()
         # Préparation de la requête d'insertion
         insert_query = """
         INSERT INTO pokemon (
