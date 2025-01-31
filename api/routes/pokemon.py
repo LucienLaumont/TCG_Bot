@@ -37,7 +37,6 @@ def search_pokemon(name: str = Query(..., min_length=1), db: Session = Depends(g
         "height_m": pokemon.height_m,
         "generation": pokemon.generation,
         "classfication": pokemon.classfication,
-        "is_legendary": pokemon.is_legendary
     }
 
 # Ajouter un nouveau Pokémon

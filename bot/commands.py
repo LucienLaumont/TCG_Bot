@@ -3,6 +3,7 @@ import httpx
 from discord.ext import commands
 from sqlalchemy.orm import Session
 from random import randint
+from .utils import compare_numeric_values
 import os
 
 intents = discord.Intents.default()
@@ -25,14 +26,15 @@ async def register(ctx):
     async with httpx.AsyncClient() as client:
         # Appel à l'API via l'URL Ngrok
         response = await client.get(f"{NGROK_URL}/api/player/{discord_id}")
-        
+        print(f"{NGROK_URL}/api/player/{discord_id}")        
         if response.status_code == 200:
             await ctx.send(f"{ctx.author.mention}, vous êtes déjà enregistré dans la base de données.")
         elif response.status_code == 404:
             # Créer un nouveau joueur via l'API
             data = {"discord_id": discord_id, "player_name": player_name}
+            print(data)    
             create_response = await client.post(f"{NGROK_URL}/api/player/", json=data)
-            
+            print(create_response)
             if create_response.status_code == 200:
                 await ctx.send(f"{ctx.author.mention}, vous avez été enregistré avec succès dans la base de données !")
             else:
@@ -86,7 +88,6 @@ async def pokedl(ctx):
                     "Taille (m)": " ",
                     "Génération": " ",
                     "Classification": " ",
-                    "Légendaire": " "
                 }
 
                 # Ajouter chaque champ à l'embed avec le carré rouge
@@ -161,14 +162,24 @@ async def guess(ctx, *, pokemon_guess: str):
                 "height_m": {"label": "Taille (m)", "target_value": target_pokemon.get("height_m"), "guessed_value": guessed_pokemon.get("height_m")},
                 "generation": {"label": "Génération", "target_value": target_pokemon.get("generation"), "guessed_value": guessed_pokemon.get("generation")},
                 "classfication": {"label": "Classification", "target_value": target_pokemon.get("classfication"), "guessed_value": guessed_pokemon.get("classfication")},
-                "is_legendary": {"label": "Légendaire", "target_value": target_pokemon.get("is_legendary"), "guessed_value": guessed_pokemon.get("is_legendary")}
             }
 
-            # Ajouter les champs à l'embed avec 🟩 ou 🟥
             for key, info in categories.items():
-                emoji = "🟩" if info["guessed_value"] == info["target_value"] else "🟥"
+                if key in ["weight_kg", "height_m"]:
+                    # Comparer les valeurs numériques si elles sont présentes
+                    if info["target_value"] and info["guessed_value"]:
+                        emoji = compare_numeric_values(info["target_value"], info["guessed_value"])
+                    else:
+                        emoji = "❓"  # Si les valeurs sont manquantes ou incorrectes
+                else:
+                    # Comparaison normale pour les autres champs
+                    emoji = "🟩" if info["guessed_value"] == info["target_value"] else "🟥"
+
+                # Déterminer la valeur à afficher
                 value_display = info["guessed_value"] if info["guessed_value"] is not None else "?"
-                embed.add_field(name=f"**{info['label']}**", value=f"{emoji} {value_display}", inline=True)
+
+                # Ajouter le champ à l'embed
+                embed.add_field(name=f"**{info['label']} : {value_display}**", value=f"{emoji} ", inline=True)
 
             # Envoyer l'embed au joueur
             await ctx.send(embed=embed)
