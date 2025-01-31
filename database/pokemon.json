@@ -1,32 +1,5 @@
 [
     {
-        "pokedex_id": 0,
-        "generation": 1,
-        "category": "Pok\u00e9mon Bug",
-        "name": {
-            "fr": "MissingNo.",
-            "en": "MissingNo.",
-            "jp": "\u30ad\u30e3\u30bf\u30d4\u30fc"
-        },
-        "sprites": {
-            "regular": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/0/regular.png",
-            "shiny": null,
-            "gmax": null
-        },
-        "types": null,
-        "talents": null,
-        "stats": null,
-        "resistances": null,
-        "evolution": null,
-        "height": null,
-        "weight": null,
-        "egg_groups": null,
-        "sexe": null,
-        "catch_rate": null,
-        "level_100": null,
-        "formes": null
-    },
-    {
         "pokedex_id": 1,
         "generation": 1,
         "category": "Pok\u00e9mon Graine",

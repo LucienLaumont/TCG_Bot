@@ -26,10 +26,9 @@ class Pokemon(BaseModel):
     evolution: Optional[int] = None
     type1: str
     type2: Optional[str] = None
-    weight_kg: Optional[float] = None
-    height_m: Optional[float] = None
+    weight_kg: Optional[str] = None
+    height_m: Optional[str] = None
     generation: int
-    is_legendary: int
     classfication: Optional[str] = None
 
     class Config:
@@ -41,10 +40,9 @@ class PokemonCreate(BaseModel):
     evolution: Optional[int] = None
     type1: str
     type2: Optional[str] = None
-    weight_kg: Optional[float] = None
-    height_m: Optional[float] = None
+    weight_kg: Optional[str] = None
+    height_m: Optional[str] = None
     generation: int
-    is_legendary: int
     classfication: Optional[str] = None
 
     class Config:
@@ -60,10 +58,9 @@ class PokemonSession(BaseModel):
     evolution: Optional[int] = None
     type1: Optional[str] = None
     type2: Optional[str] = None
-    weight_kg: Optional[float] = None
-    height_m: Optional[float] = None
+    weight_kg: Optional[str] = None
+    height_m: Optional[str] = None
     generation: Optional[int] = None
-    is_legendary: Optional[int] = None
     classfication: Optional[str] = None
 
     class Config:
@@ -78,10 +75,9 @@ class PokemonSessionCreate(BaseModel):
     evolution: Optional[int] = None
     type1: Optional[str] = None
     type2: Optional[str] = None
-    weight_kg: Optional[float] = None
-    height_m: Optional[float] = None
+    weight_kg: Optional[str] = None
+    height_m: Optional[str] = None
     generation: Optional[int] = None
-    is_legendary: Optional[int] = None
     classfication: Optional[str] = None
 
     class Config:
