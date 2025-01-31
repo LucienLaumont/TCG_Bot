@@ -5,7 +5,7 @@ from typing import List
 from unidecode import unidecode
 
 from ..models.schemas import Pokemon as PokemonSchema, PokemonCreate
-from ..services.pokemon import create_pokemon, update_pokemon, delete_pokemon, get_pokemon_by_id, search_pokemon_by_name
+from ..services.pokemon import create_pokemon, update_pokemon, delete_pokemon, get_pokemon_by_id, search_pokemon_by_name, suggest_pokemon
 from ..services.db import get_db
 
 router = APIRouter()
@@ -61,3 +61,10 @@ def remove_pokemon(pokedex_number: int, db: Session = Depends(get_db)):
     if not delete_pokemon(db, pokedex_number):
         raise HTTPException(status_code=404, detail="Le Pokémon spécifié est introuvable")
     return {"detail": "Le Pokémon a été supprimé avec succès"}
+
+@router.get("/pokemon/suggestions/", response_model=List[str])
+def get_pokemon_suggestions(query: str = Query(..., min_length=1), db: Session = Depends(get_db)):
+    pokemons = suggest_pokemon(db, query)
+    if not pokemons:
+        raise HTTPException(status_code=404, detail="Aucun Pokémon trouvé pour la recherche donnée.")
+    return pokemons

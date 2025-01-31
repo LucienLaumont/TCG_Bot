@@ -1,5 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.sql.expression import func
+from sqlalchemy import select
+from typing import List
 from fastapi import HTTPException
 
 from urllib.parse import unquote
@@ -66,3 +68,14 @@ def delete_pokemon(db: Session, pokedex_number: int):
     db.commit()
     return True
 
+def suggest_pokemon(db: Session, query: str) -> List[str]:
+    # Requête pour rechercher les noms de Pokémon similaires
+    result = db.execute(
+        select(PokemonModel.name_fr)
+        .where(PokemonModel.name_fr.ilike(f"%{query}%"))
+        .limit(10)
+    )
+
+    # Extraire les noms de Pokémon de la réponse
+    suggestions = [row[0] for row in result.fetchall()]
+    return suggestions
